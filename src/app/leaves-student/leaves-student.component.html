@@ -1,0 +1,49 @@
+<ul class="list-group">
+    <ng-container *ngFor="let myLeave of myLeaves">
+        <li class="list-group-item">
+            <span>{{myLeave.from | date:"MM/dd/yy"}} - {{myLeave.to | date:"MM/dd/yy"}}</span>
+            <span style="float: right;">Status - {{myLeave.status}}</span>
+        </li>
+    </ng-container>
+</ul>
+
+<br/>
+
+<button type="button" class="btn btn-primary" *ngIf="!displayFormFlag" (click)="displayForm()">Apply new Leave</button>
+<button type="button" class="btn btn-primary" *ngIf="displayFormFlag" (click)="hideForm()">Don't apply</button>
+
+<div class="box">
+    <form *ngIf="displayFormFlag" [formGroup] = "myForm" (ngSubmit)="applyLeave()">
+
+        <div class="form-group row mb-3">
+            <label class="col-sm-2 col-form-label">From</label>
+            <div class="col-sm-10">
+                <input type="date" formControlName="from" class="form-control">
+                <div *ngIf="myForm.get('from')?.touched">
+                    <p *ngIf="myForm.get('from')?.invalid " class="text-danger">Please select a date</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-group row mb-3">
+            <label class="col-sm-2 col-form-label">To</label>
+            <div class="col-sm-10">
+                <input type="date" formControlName="to" class="form-control">
+                <div *ngIf="myForm.get('to')?.touched">
+                    <p *ngIf="myForm.get('to')?.invalid " class="text-danger">Please select a date</p>
+                </div>
+            </div>
+        </div>
+        
+          <button type="submit" class="btn btn-primary" [disabled]="myForm.status=='INVALID'">Apply</button>
+        </form>
+</div>
+
+<!-- <h3>My leaves</h3> -->
+
+<!-- <ol>
+    <ng-container *ngFor="let myLeave of myLeaves">
+        <li>{{myLeave.registrationID}} {{myLeave.email}} {{myLeave.from | date:"MM/dd/yy"}} {{myLeave.to | date:"MM/dd/yy"}} {{myLeave.status}}
+        </li>
+    </ng-container>
+</ol> -->

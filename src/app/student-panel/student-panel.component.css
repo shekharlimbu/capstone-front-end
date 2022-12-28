@@ -1,0 +1,10 @@
+.box{
+    margin-top: 25px;
+    margin-right: 25px;
+}
+
+.success{
+    font-style: italic;
+    color: green;
+    text-align: right;
+}

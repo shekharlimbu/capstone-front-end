@@ -1,0 +1,44 @@
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{myProfile.id}}</h5>
+    <p class="card-text">{{myProfile.email}}</p>
+    <a class="btn btn-primary" *ngIf="!displayFormFlag" (click)="displayForm()">Change my Email</a>
+    <a class="btn btn-primary" *ngIf="displayFormFlag" (click)="hideForm()">Don't change email</a>
+  </div>
+</div>
+
+<div class="box">
+  <form *ngIf="displayFormFlag" [formGroup] = "myForm" (ngSubmit)="updateProfile()">
+    <div class="form-group row mb-3">
+        <label class="col-sm-2 col-form-label">New Email</label>
+        <div class="col-sm-10">
+          <input type="text" formControlName="email" class="form-control">
+          <div *ngIf="myForm.get('email')?.touched">
+              <p *ngIf="myForm.get('email')?.invalid " class="text-danger">Please enter a valid email</p>
+          </div>
+        </div>
+      </div>
+    <button type="submit" class="btn btn-primary" [disabled]="myForm.status=='INVALID'">Submit</button>
+  </form>
+</div>
+
+
+
+
+
+
+<!-- <p>Registration ID - {{myProfile.id}}</p>
+<p>Email - {{myProfile.email}}</p> -->
+
+<!-- <button type="button" class="btn btn-primary" (click)="displayForm()">Change my Email</button> -->
+
+<!-- <form *ngIf="displayFormFlag" [formGroup] = "myForm" (ngSubmit)="updateProfile()">
+  <div class="form-group">
+      <label>Student Email address</label>
+      <input type="text" formControlName="email" class="form-control">
+      <div *ngIf="myForm.get('email')?.touched">
+          <p *ngIf="myForm.get('email')?.invalid " class="text-danger">Please enter a valid email</p>
+      </div>
+    </div>
+  <button type="submit" class="btn btn-primary" [disabled]="myForm.status=='INVALID'">Send Email</button>
+</form> -->

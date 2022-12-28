@@ -1,0 +1,84 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let specialNotification of specialNotifications">
+        <td>{{specialNotification.name}}</td>
+        <td>{{specialNotification.description}}</td>
+        <td>
+            <button type="button" class="btn btn-outline-danger myButton" (click)="deleteNotification(specialNotification.name)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+</table>
+
+<div class="container box">
+    <button type="button" class="btn btn-primary" *ngIf="!displayFormFlag" (click)="displayForm()">Add new notification</button>
+    <button type="button" class="btn btn-primary" *ngIf="displayFormFlag" (click)="hideForm()">Cancel notification</button>
+
+    <form *ngIf="displayFormFlag" [formGroup] = "myForm" (ngSubmit)="addNotification()">
+
+        <div class="form-group row mb-3">
+            <label class="col-sm-2 col-form-label">Title</label>
+            <div class="col-sm-10">
+                <input type="text" formControlName="name" class="form-control">
+                <div *ngIf="myForm.get('name')?.touched">
+                    <p *ngIf="myForm.get('name')?.invalid " class="text-danger">Please enter a title</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row mb-3">
+            <label class="col-sm-2 col-form-label">Description</label>
+            <div class="col-sm-10">
+                <input type="text" formControlName="description" class="form-control">
+                <div *ngIf="myForm.get('description')?.touched">
+                    <p *ngIf="myForm.get('description')?.invalid " class="text-danger">Please enter a description</p>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="myForm.status=='INVALID'">Create notification</button>
+      </form>
+</div>
+
+
+<!-- <h3>Special Notifications</h3>
+
+<ol>
+    <ng-container *ngFor="let specialNotification of specialNotifications">
+        <li>{{specialNotification.name}} {{specialNotification.description}}
+            <button (click)="deleteNotification(specialNotification.name)">Delete</button>
+        </li>
+    </ng-container>
+</ol>
+
+<div class="container">
+    <button type="button" class="btn btn-primary" (click)="displayForm()">Add new Special notification</button>
+
+    <form *ngIf="displayFormFlag" [formGroup] = "myForm" (ngSubmit)="addNotification()">
+
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" formControlName="name" class="form-control">
+            <div *ngIf="myForm.get('name')?.touched">
+                <p *ngIf="myForm.get('name')?.invalid " class="text-danger">Please enter a title</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" formControlName="description" class="form-control">
+            <div *ngIf="myForm.get('description')?.touched">
+                <p *ngIf="myForm.get('description')?.invalid " class="text-danger">Please enter a description</p>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="myForm.status=='INVALID'">Create notification</button>
+      </form>
+</div> -->

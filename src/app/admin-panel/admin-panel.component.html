@@ -1,0 +1,97 @@
+<div class="container">
+
+  <div class="alert alert-primary" role="alert" style="margin-top: 30px; margin-bottom: 0px;">
+    <h3><h3>Welcome admin!</h3></h3>
+  </div>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" style="cursor:pointer" routerLink="/admin/students" routerLinkActive="active" (click)="showStudents()">Students</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" style="cursor:pointer" routerLink="/admin/leaves" routerLinkActive="active" (click)="showLeaves()">Leaves</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" style="cursor:pointer" routerLink="/admin/general" routerLinkActive="active" (click)="showGeneral()">General Notifications</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" style="cursor:pointer" routerLink="/admin/special" routerLinkActive="active" (click)="showSpecial()">Special Notifications</a>
+        </li>
+      </ul>   
+    </div>
+
+    <ul class="navbar-nav">
+      <a class="nav-link" style="cursor:pointer" *ngIf="!displayFormFlag" (click)="generateRegId()">Generate Registration ID</a>
+      <a class="nav-link" style="cursor:pointer" *ngIf="displayFormFlag" (click)="hideForm()">Abort registration process</a>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div class="container box">
+            <router-outlet></router-outlet>
+        </div>
+      </div>
+      <div class="col" *ngIf="displayMainColumn">
+        <div class="container box success">
+          <p *ngIf="displayMsgFlag"><i>Email sent successfully</i></p>
+        </div>
+        <div class="container box" *ngIf="displayFormFlag">
+          <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{registrationID}}</h5>
+              <p class="card-text">New Registration ID generated!</p>
+            </div>
+          </div>
+          <div class="box" *ngIf="displayFormFlag">
+            <form *ngIf="registrationIDExists" [formGroup] = "myForm" (ngSubmit)="sendEmail()">
+
+              <div class="form-group row mb-3">
+                  <label class="col-sm-2 col-form-label">Student Email</label>
+                  <div class="col-sm-10">
+                    <input type="text" formControlName="email" class="form-control">
+                    <div *ngIf="myForm.get('email')?.touched">
+                        <p *ngIf="myForm.get('email')?.invalid " class="text-danger">Please enter a valid email</p>
+                    </div>
+                  </div>
+                </div>
+      
+              <button type="submit" class="btn btn-primary" [disabled]="myForm.status=='INVALID'">Send Email</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- <h2>Admin actions</h2>
+
+<div class="container">
+    <button type="button" class="btn btn-primary" (click)="generateRegId()">Generate Registration ID</button>
+    <p *ngIf="counterValueExists" >{{registrationID}}</p>
+
+    <form *ngIf="registrationIDExists" [formGroup] = "myForm" (ngSubmit)="sendEmail()">
+
+        <div class="form-group">
+            <label>Student Email address</label>
+            <input type="text" formControlName="email" class="form-control">
+            <div *ngIf="myForm.get('email')?.touched">
+                <p *ngIf="myForm.get('email')?.invalid " class="text-danger">Please enter a valid email</p>
+            </div>
+          </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="myForm.status=='INVALID'">Send Email</button>
+      </form>
+</div>
+<br/><br/> -->
+<!-- <button type="button" class="btn btn-info" (click)="showStudents()">Students</button>
+<button type="button" class="btn btn-info" (click)="showLeaves()">Leaves</button>
+<button type="button" class="btn btn-info" (click)="showGeneral()">General Notifications</button>
+<button type="button" class="btn btn-info" (click)="showSpecial()">Special Notifications</button>
+<router-outlet></router-outlet> -->

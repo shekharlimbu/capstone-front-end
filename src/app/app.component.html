@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyApp</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a style="padding-left: 10px;" class="navbar-brand" routerLink="/about" routerLinkActive="active">MyApp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active">Home</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/notifications" routerLinkActive="active">Notifications</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/student" routerLinkActive="active">Student Panel</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/admin" routerLinkActive="active">Admin Panel</a>
+        </li>
+      </ul>   
+    </div>
+
+    <ul class="navbar-nav">
+      <a class="nav-link" *ngIf="!_auth.isLoggedIn()" routerLink="/login" routerLinkActive="active">Login</a>
+      <a class="nav-link" *ngIf="!_auth.isLoggedIn()" routerLink="/register" routerLinkActive="active">Register</a>
+      <a class="nav-link" *ngIf="_auth.isLoggedIn()" style="cursor:pointer" (click)="_auth.logoutUser()">Logout</a>
+    </ul>
+  </nav>
+  <div class="container"><router-outlet></router-outlet></div>
+</body>
+</html>

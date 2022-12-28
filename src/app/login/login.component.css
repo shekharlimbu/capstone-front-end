@@ -1,0 +1,9 @@
+.box{
+    margin-top: 25px;
+    margin-right: 25px;
+}
+
+.error{
+    font-style: italic;
+    color: red;
+}

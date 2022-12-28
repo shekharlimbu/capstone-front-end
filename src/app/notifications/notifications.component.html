@@ -1,0 +1,27 @@
+<div class="container">
+    <div class="alert alert-primary" role="alert" style="margin-top: 30px;">
+        <h3>Special notifications</h3>
+    </div>
+
+    <div style="display: table">
+        <ul style="list-style-type:none;">
+            <ng-container *ngFor="let notification of notifications">
+                <li style="padding: 10px; display: inline-block;">
+                    <div class="card" style="width: 18rem; height: 10rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">{{notification.name}}</h5>
+                            <p class="card-text">{{notification.description}}</p>
+                            <a href="#" class="btn btn-primary">Read more..</a>
+                        </div>
+                    </div>
+                </li>
+            </ng-container>
+        </ul>
+    </div>  
+</div>
+
+<!-- <ol>
+    <ng-container *ngFor="let notification of notifications">
+        <li>{{notification.name}} - {{notification.description}}</li>
+    </ng-container>
+</ol> -->

@@ -1,0 +1,44 @@
+
+
+<div class="card" style="width: 18rem;" *ngIf="resetFlag">
+    <div class="card-body">
+      <h5 class="card-title">Password reset for</h5>
+      <p class="card-text">{{resetFor}}</p>
+    </div>
+</div>
+<br/>
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Registration ID</th>
+        <th scope="col">Email</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{student.id}}</td>
+        <td>{{student.email}}</td>
+        <td>
+            <button type="button" class="btn btn-outline-danger myButton" *ngIf="student.active" (click)="block(student.id)">Block</button>
+            <button type="button" class="btn btn-outline-success myButton" *ngIf="!student.active" (click)="unblock(student.id)">Unblock</button>
+            <button type="button" class="btn btn-outline-dark myButton" (click)="resetPassword(student.id)">Reset password</button>
+        </td>
+      </tr>
+    </tbody>
+</table>
+
+  <!-- <h3>Students List</h3>
+
+  <ol>
+      <ng-container *ngFor="let student of students">
+          <li>{{student.id}} {{student.email}}
+              <button *ngIf="student.active" (click)="block(student.id)">Block</button>
+              <button *ngIf="!student.active" (click)="unblock(student.id)">Unblock</button>
+              <button (click)="resetPassword(student.id)">Reset password</button>
+          </li>
+      </ng-container>
+  </ol>
+  
+  <p *ngIf="resetFlag">Password reset for {{resetFor}}</p> -->
